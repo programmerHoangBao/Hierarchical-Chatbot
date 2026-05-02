@@ -134,4 +134,3 @@ class BBLAMultiLabelModel(nn.Module):
         predictions = torch.cat(outputs, dim=1)  # [batch_size, num_tags]
         
         return predictions
-    

@@ -1,7 +1,7 @@
 import torch
 from transformers import AutoTokenizer
 from models import BBLAMultiLabelModel
-from config import Config_layer_1
+from config import ConfigLayer1
 import logging
 
 logger = logging.getLogger(__name__)
@@ -55,20 +55,18 @@ class Predictor:
         logger.info(f"Tag to Index Mapping: {self.TAG_TO_IDX}")
         logger.info(f"Index to Tag Mapping: {self.IDX_TO_TAG}")
     
-    def predict(self, 
-                question: str,
-                return_probabilities: bool = False):
+    def predict(self, question: str):
         """
         Predict tags for a question
         
         Args:
             question: Input question text
-            return_probabilities: If True, return probabilities; else binary predictions
         
         Returns:
             Dictionary with:
-                - tags: List of predicted tags
-                - probabilities: Dict of tag -> probability
+                - question: Original question
+                - predicted_tags: List of predicted tags
+                - prediction_probabilities: Dict of tag -> probability
                 - prediction_array: Binary array
         """
         
@@ -127,7 +125,7 @@ def demo_predict():
     print("Multi-Label Classification - Prediction Demo")
     print("="*80)
     
-    config_obj = Config_layer_1()
+    config_obj = ConfigLayer1()
     # Initialize predictor
     predictor = Predictor(
         model_path=config_obj.SAVE_PATH,
